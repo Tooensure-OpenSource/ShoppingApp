@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using ShoppingApp.Data.DbSet;
 
 namespace shoppingApp.Data.DbSet
 {
@@ -11,7 +12,8 @@ namespace shoppingApp.Data.DbSet
         [Required,EmailAddress]
         public string EmailAddress { get; set; } = String.Empty;
         public List<Order> Orders { get; set; } = new();
-        public List<Product> Products { get; set; } = new();
+        public List<Business> Businesses { get; set; } = new();
+
 
     }
 }

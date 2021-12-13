@@ -10,11 +10,8 @@ namespace shoppingApp.Data.DbSet
         public decimal Cost { get; set; }
         
         [ForeignKey("id")]
-        public Guid BuisnessId { get; set; }
-        public Business? Business { get; set; } = null;
-        
-        public List<User> Users { get; set; } = new();
-        
+        public Guid BusinessId { get; set; }
+        public Business? Business { get; set; } = null;        
 
     }
 }
