@@ -11,11 +11,12 @@ namespace shoppingApp.Data.Data
         public DbSet<Business>? Businesses { get; set; }
         public DbSet<Product>? Products { get; set; }
         public DbSet<Order>? Orders { get; set; }
+        public DbSet<Order>? OrderItems { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=DESKTOP-4AVB77M\\TOOENSURE; Initial Catalog=ShoppingAppDb; Integrated Security=True");
+            optionsBuilder.UseSqlServer("Data Source=DESKTOP-4AVB77M\\TOOENSURE; Initial Catalog=Testdb; Integrated Security=True");
         }
     }
 }
