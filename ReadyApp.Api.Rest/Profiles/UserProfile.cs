@@ -21,6 +21,9 @@ namespace ReadyApp.Api.Rest.Profiles
 
             CreateMap<User, UserDto>()
                 .ForMember(
+                    dest => dest.Id,
+                    otp => otp.MapFrom(src => src.Id))
+                .ForMember(
                     dest => dest.FirstName,
                     otp => otp.MapFrom(src => src.FristName))
                 .ForMember(
@@ -31,7 +34,13 @@ namespace ReadyApp.Api.Rest.Profiles
                     otp => otp.MapFrom(src => src.EmailAddress))
                 .ForMember(
                     dest => dest.DateCreated,
-                    otp => otp.MapFrom(src => src.DateCreated));
+                    otp => otp.MapFrom(src => src.DateCreated))
+                .ForMember(
+                    dest => dest.Orders,
+                    otp => otp.MapFrom(src => src.Orders.Count()))
+                .ForMember(
+                    dest => dest.Businesses,
+                    otp => otp.MapFrom(src => src.Businesses.Count()));
                 
         }
     }

@@ -9,9 +9,33 @@ namespace ReadyApp.Api.Rest.Profiles
     {
         public OrderProfile()
         {
-            CreateMap<AddOrderDto, Order>();
+            CreateMap<AddOrderDto, Order>()
+                .ForMember(
+                    dest => dest.UserId,
+                    otp => otp.MapFrom(src => src.UserId))
+                .ForMember(
+                    dest => dest.BuisnessId,
+                    otp => otp.MapFrom(src => src.BusinessId))
+                .ForMember(
+                    dest => dest.OrderItems,
+                    otp => otp.Ignore());
 
-            CreateMap<Order, OrderDto>();
+            CreateMap<Order, OrderDto>()
+                .ForMember(
+                    dest => dest.Id,
+                    otp => otp.MapFrom(src => src.Id))
+                .ForMember(
+                    dest => dest.UserId,
+                    otp => otp.MapFrom(src => src.UserId))
+                .ForMember(
+                    dest => dest.BusinessId,
+                    otp => otp.MapFrom(src => src.BuisnessId))
+                .ForMember(
+                    dest => dest.OrderItems,
+                    otp => otp.MapFrom(src => src.OrderItems.Count()))
+                .ForMember(
+                    dest => dest.DateCreated,
+                    otp => otp.MapFrom(src => src.DateCreated));
         }
     }
 }
