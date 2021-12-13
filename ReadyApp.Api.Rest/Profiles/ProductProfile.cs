@@ -11,7 +11,7 @@ namespace ReadyApp.Api.Rest.Profiles
         {
             CreateMap<AddProductDto, Product>()
                 .ForMember(
-                    dest => dest.BuisnessId,
+                    dest => dest.BusinessId,
                     otp => otp.MapFrom(src => src.BusinessId))
                 .ForMember(
                     dest => dest.Name,
@@ -23,7 +23,7 @@ namespace ReadyApp.Api.Rest.Profiles
             CreateMap<Product, ProductDto>()
                 .ForMember(
                     dest => dest.BusinessId,
-                    otp => otp.MapFrom(src => src.BuisnessId))
+                    otp => otp.MapFrom(src => src.BusinessId))
                 .ForMember(
                     dest => dest.Name,
                     otp => otp.MapFrom(src => src.Name))

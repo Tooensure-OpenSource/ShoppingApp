@@ -14,7 +14,7 @@ namespace ReadyApp.Api.Rest.Profiles
                     dest => dest.UserId,
                     otp => otp.MapFrom(src => src.UserId))
                 .ForMember(
-                    dest => dest.BuisnessId,
+                    dest => dest.BusinessId,
                     otp => otp.MapFrom(src => src.BusinessId))
                 .ForMember(
                     dest => dest.OrderItems,
@@ -29,7 +29,7 @@ namespace ReadyApp.Api.Rest.Profiles
                     otp => otp.MapFrom(src => src.UserId))
                 .ForMember(
                     dest => dest.BusinessId,
-                    otp => otp.MapFrom(src => src.BuisnessId))
+                    otp => otp.MapFrom(src => src.BusinessId))
                 .ForMember(
                     dest => dest.OrderItems,
                     otp => otp.MapFrom(src => src.OrderItems.Count()))
