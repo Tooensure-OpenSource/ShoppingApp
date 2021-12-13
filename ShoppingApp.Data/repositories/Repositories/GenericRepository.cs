@@ -12,7 +12,7 @@ namespace shoppingApp.Data.repositories.Repositories
             _context = context;
             _dbSet = _context.Set<T>();
         }
-        public async Task<bool> Add(T entity)
+        public virtual async Task<bool> Add(T entity)
         {
             await _dbSet.AddAsync(entity);
             return true;
@@ -20,7 +20,7 @@ namespace shoppingApp.Data.repositories.Repositories
 
         public abstract Task<bool> Delete(T entity);
 
-        public async Task<IEnumerable<T>> All()
+        public virtual async Task<IEnumerable<T>> All()
         {
             return await _dbSet.ToListAsync();
         }
