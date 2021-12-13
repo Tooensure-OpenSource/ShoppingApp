@@ -59,24 +59,5 @@ namespace ReadyApp.Api.Rest.Controllers.v1
                 return BadRequest("This is actually suppose to be a bad entity proccess");
             }
         }
-
-        public async Task<ActionResult<ProductDto>> ProductForBusiness(Guid userId, Guid businessId, Guid productId)
-        {
-            var productFromRepo = await _unitOfWork.Products.Get(userId, businessId, productId);
-            var products = _mapper.Map<ProductDto>(productFromRepo);
-            return Ok(products);
-        }
-
-        public async Task<ActionResult<IEnumerable<ProductDto>>> ProductsForBusiness(Guid userId, Guid businessId)
-        {
-            var productsFromRepo = await _unitOfWork.Products.ProductsForBusiness(userId, businessId);
-            var products = _mapper.Map<IEnumerable<ProductDto>>(productsFromRepo);
-            return Ok(products);
-        }
-
-        public Task<ActionResult<IEnumerable<ProductDto>>> ProductsForUser(Guid userId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
