@@ -20,6 +20,7 @@ namespace ReadyApp.Api.Rest.Controllers.v1
         public override async Task<ActionResult<UserDto>> Get(Guid userId)
         {
             var user = await _unitOfWork.Users.Get(userId);
+            if (user == null) return BadRequest("User don't exist");
             var response = _mapper.Map<UserDto>(user);
             return Ok(response);
         }
