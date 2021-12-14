@@ -11,7 +11,7 @@ namespace shoppingApp.Data.DbSet
         
         [ForeignKey("id")]
         public Guid BusinessId { get; set; }
-        public Business? Business { get; set; } = null;        
+        public Business Business { get; set; } = new();        
 
     }
 }
