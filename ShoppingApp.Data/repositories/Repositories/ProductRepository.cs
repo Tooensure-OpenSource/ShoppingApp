@@ -31,5 +31,30 @@ namespace shoppingApp.Data.repositories.Repositories
             return await _dbSet
             .AnyAsync(x => x.Id == productId);
         }
+
+        public async Task<bool> IsUserOfBusiness(Guid userId, Guid businessId)
+        {
+            var filterbusiness = await _dbSet
+            .Include(x => x.Business)
+            .Where(x => x.Business.Users.Any(x => x.Id == userId))
+            .AnyAsync(x => x.BusinessId == businessId);
+
+            return filterbusiness;
+        }
+
+        public Task<bool> BusinessExist(Guid businessId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> IsProductOfBusiness(Guid productId, Guid businessId)
+        {
+            var filterbusiness = await _dbSet
+            .Include(x => x.Business)
+            .Where(x => x.Business.Products.Any(x => x.Id == productId))
+            .AnyAsync(x => x.BusinessId == businessId);
+
+            return filterbusiness;
+        }
     }
 }
