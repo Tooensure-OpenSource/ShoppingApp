@@ -20,13 +20,8 @@ namespace ReadyApp.Api.Rest.Controllers.v1
             var product = _mapper.Map<Product>(incomming);
 
             // Verify business exist
-            var business = await _unitOfWork.Businesses.Get(incomming.BusinessId);
-            if(business == null) return BadRequest("Business not exist");
-            
-            // Verfy business contains user
-            var isUser = business.Users.Any(x => x.Id == incomming.UserId);
-            if(isUser.Equals(false)) return BadRequest("You can not create a business here");
-            business.Products.Add(product);
+            var isUserOfBusiness = await _unitOfWork.Products.IsUserOfBusiness(incomming.UserId, incomming.BusinessId);
+            if(!isUserOfBusiness) return BadRequest("Not arthorized");
 
             await _unitOfWork.Products.Add(product);
             await _unitOfWork.CompleteAsync();

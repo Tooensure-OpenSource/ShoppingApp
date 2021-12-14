@@ -18,16 +18,22 @@ namespace ReadyApp.Api.Rest.Controllers.v1
         [HttpPost]
         public override async Task<ActionResult<OrderDto>> Add(AddOrderDto incomming)
         {
-            var orderItem = _mapper.Map<IEnumerable<OrderItem>>(incomming.Products);
+            var isUser = await _unitOfWork.Users.Exist(incomming.UserId);
+            if(!isUser) BadRequest("User don't exist");
+            
+            var orderItems = _mapper.Map<IEnumerable<OrderItem>>(incomming.Products);
             var order = _mapper.Map<Order>(incomming);
-    
-            // NOTE: One2Many relationship forces me to add order into
-            // the user list of order first.
-            // since this api design will act as a micro service.
-            // the client must request order into the user first
-            // var user = await _unitOfWork.Users.Get(order.UserId);
-            // user.Orders.Add(order);
-            // Complete
+
+            // Checking if products and business compare/true
+            foreach (var product in orderItems)
+            {
+                var isProductOfBusiness = await _unitOfWork.Products.IsProductOfBusiness(product.ProductId, incomming.BusinessId);
+                if(!isProductOfBusiness) return BadRequest("Can't process order");
+                order.OrderItems.Add(product);
+            }
+
+        
+
             await _unitOfWork.Orders.Add(order);
             await _unitOfWork.CompleteAsync();
 

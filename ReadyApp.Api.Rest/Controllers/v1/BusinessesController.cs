@@ -45,6 +45,7 @@ namespace ReadyApp.Api.Rest.Controllers.v1
         public override async Task<ActionResult<BusinessDto>> Get(Guid businessId)
         {
             var businessFromRepo = await _unitOfWork.Businesses.Get(businessId);
+            if(businessFromRepo == null) return BadRequest("Business don't exist");
             var business = _mapper.Map<BusinessDto>(businessFromRepo);
             
             return Ok(business);
