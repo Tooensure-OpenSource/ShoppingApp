@@ -25,9 +25,9 @@ namespace shoppingApp.Data.repositories.Repositories
             return await _dbSet.ToListAsync();
         }
 
-        public virtual async Task<T> Get(Guid Id)
+        public virtual async Task<T?> Get(Guid Id)
         {
-            return await _dbSet.FirstAsync();
+            return await _dbSet.FirstOrDefaultAsync();
         }
     }
 }

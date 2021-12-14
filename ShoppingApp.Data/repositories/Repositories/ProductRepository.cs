@@ -10,10 +10,10 @@ namespace shoppingApp.Data.repositories.Repositories
         {}
         
 
-        public override async Task<Product> Get(Guid productId)
+        public override async Task<Product?> Get(Guid productId)
         {
             return await _dbSet
-            .FirstAsync(x => x.Id == productId);
+            .FirstOrDefaultAsync(x => x.Id == productId);
         }
 
         public override Task<bool> Delete(Product entity)

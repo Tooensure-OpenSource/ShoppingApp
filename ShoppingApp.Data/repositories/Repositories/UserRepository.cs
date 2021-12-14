@@ -16,11 +16,11 @@ namespace shoppingApp.Data.repositories.Repositories
             .Include(x => x.Orders)
             .ToListAsync();
         }
-        public override async Task<User> Get(Guid userId)
+        public override async Task<User?> Get(Guid userId)
         {
             return await _dbSet
             .Include(x => x.Businesses)
-            .FirstAsync(x => x.Id == userId);
+            .FirstOrDefaultAsync(x => x.Id == userId);
         }
 
         public override Task<bool> Delete(User entity)

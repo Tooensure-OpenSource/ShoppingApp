@@ -4,7 +4,7 @@ namespace shoppingApp.Data.repositories.IRepostories
     {
         Task<bool> Add(T entity);
         Task<IEnumerable<T>> All();
-        Task<T> Get(Guid Id);
+        Task<T?> Get(Guid Id);
         Task<bool> Delete(T entity);
     }
 }
