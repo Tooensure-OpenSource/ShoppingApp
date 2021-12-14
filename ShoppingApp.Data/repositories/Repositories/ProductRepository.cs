@@ -1,3 +1,4 @@
+using EcommerceApp.Domain.ResourceParameters.Search;
 using Microsoft.EntityFrameworkCore;
 using shoppingApp.Data.DbSet;
 using shoppingApp.Data.repositories.IRepostories;
@@ -55,6 +56,15 @@ namespace shoppingApp.Data.repositories.Repositories
             .AnyAsync(x => x.BusinessId == businessId);
 
             return filterbusiness;
+        }
+
+        public async Task<IEnumerable<Product>> GetProducts(ProductSearch searchQuery)
+        {
+            // Store data in a collection ready for filtering
+            var collection = await _dbSet
+            .Where(x => x.Name.Contains(searchQuery.ProductName) && x.BusinessId == searchQuery.BusinessId)
+            .ToListAsync();
+            return collection;
         }
     }
 }
