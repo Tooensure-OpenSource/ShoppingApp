@@ -51,11 +51,12 @@ namespace ReadyApp.Api.Rest.Controllers.v1
             return Ok(response);
         }
 
-        [HttpGet("orderId")]
+        [HttpGet("{orderId}")]
         [ActionName(nameof(Get))]
         public override async Task<ActionResult<OrderDto>> Get(Guid orderId)
         {
             var order = await _unitOfWork.Orders.Get(orderId);
+            if(order == null) return BadRequest("Order don't exist");
             var response = _mapper.Map<OrderDto>(order);
             return Ok(response);
         }
