@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Serialization;
 using shoppingApp.Data.Data;
 using shoppingApp.Data.IConfigeration;
 
@@ -7,6 +8,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddControllers( setUpAction => 
+{
+    setUpAction.ReturnHttpNotAcceptable = true;
+}).AddXmlDataContractSerializerFormatters()
+.AddNewtonsoftJson(setUpAction =>
+{
+    setUpAction.SerializerSettings.ContractResolver =
+    new CamelCasePropertyNamesContractResolver();
+});
+
 builder.Services.AddDbContext<AppDbContext>(opt => {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("ReadyAppDb"))
     .EnableSensitiveDataLogging()
