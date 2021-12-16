@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shoppingApp.Data", "shoppin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadyApp.Api.Rest", "ReadyApp.Api.Rest\ReadyApp.Api.Rest.csproj", "{8E08F97E-BA8F-4D41-ACC7-1A438785F536}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcommerceApp.Domain", "EcommerceApp.Domain\EcommerceApp.Domain.csproj", "{C647360B-E567-4512-8443-0DB78BE0F383}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{8E08F97E-BA8F-4D41-ACC7-1A438785F536}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E08F97E-BA8F-4D41-ACC7-1A438785F536}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E08F97E-BA8F-4D41-ACC7-1A438785F536}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C647360B-E567-4512-8443-0DB78BE0F383}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C647360B-E567-4512-8443-0DB78BE0F383}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C647360B-E567-4512-8443-0DB78BE0F383}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C647360B-E567-4512-8443-0DB78BE0F383}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,4 +1,5 @@
 using AutoMapper;
+using EcommerceApp.Domain.ResourceParameters.Search;
 using Microsoft.AspNetCore.Mvc;
 using ReadyApp.Api.Rest.Controllers.v1.IControllers;
 using shoppingApp.Data.DbSet;
@@ -30,7 +31,18 @@ namespace ReadyApp.Api.Rest.Controllers.v1
             return CreatedAtAction(nameof(Get), new {productId = outgoing.Id}, outgoing);
         }
 
-        [HttpGet]
+        // ProductSearch is a complex Type,meaning my default it's assumed incoming resource is coming from body
+        // Always nice to attach from Query to solve
+
+        [HttpGet()]
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts([FromQuery] ProductSearch searchQuery)
+        {
+            var productsFromRepo = await _unitOfWork.Products.GetProducts(searchQuery);
+            var products = _mapper.Map<IEnumerable<ProductDto>>(productsFromRepo);
+            
+            return Ok(products);
+        }
+
         public async override Task<ActionResult<IEnumerable<ProductDto>>> All()
         {
             var products = await _unitOfWork.Products.All();
