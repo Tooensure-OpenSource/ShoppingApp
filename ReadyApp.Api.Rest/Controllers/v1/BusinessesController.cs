@@ -31,7 +31,7 @@ namespace ReadyApp.Api.Rest.Controllers.v1
             var response = _mapper.Map<BusinessDto>(business);
             return CreatedAtAction(nameof(Get), new {businessId = response.Id}, response);
         }
-
+        
         [HttpGet]
         public async override Task<ActionResult<IEnumerable<BusinessDto>>> All()
         {
@@ -50,5 +50,16 @@ namespace ReadyApp.Api.Rest.Controllers.v1
             
             return Ok(business);
         }
+
+        [HttpDelete("{businessId}")]
+        public async Task<ActionResult> Delete(Guid businessId)
+        {
+            var business = await _unitOfWork.Businesses.Get(businessId);
+            if(business == null) return NotFound("No business by Id");
+            _unitOfWork.Businesses.Delete(business);
+            await _unitOfWork.CompleteAsync();
+            return NoContent();
+        }
+
     }
 }

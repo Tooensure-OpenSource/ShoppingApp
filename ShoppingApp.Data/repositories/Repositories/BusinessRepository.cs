@@ -25,10 +25,6 @@ namespace shoppingApp.Data.repositories.Repositories
             .Include(x => x.Users)
             .FirstOrDefaultAsync(x => x.Id == businessId);
         }
-        public override Task<bool> Delete(Business entity)
-        {
-            throw new NotImplementedException();
-        }
         
         public async Task<bool> Exist(Guid businessId)
         {
