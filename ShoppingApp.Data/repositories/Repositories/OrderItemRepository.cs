@@ -19,7 +19,7 @@ namespace ShoppingApp.Data.repositories.Repositories
             .ToListAsync();
         }
 
-        public override Task<bool> Delete(OrderItem entity)
+        public override void Delete(OrderItem entity)
         {
             throw new NotImplementedException();
         }

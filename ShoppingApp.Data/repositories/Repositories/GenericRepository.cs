@@ -18,7 +18,10 @@ namespace shoppingApp.Data.repositories.Repositories
             return true;
         }
 
-        public abstract Task<bool> Delete(T entity);
+        public virtual void  Delete(T entity)
+        {
+
+        }
 
         public virtual async Task<IEnumerable<T>> All()
         {

@@ -17,7 +17,7 @@ namespace shoppingApp.Data.repositories.Repositories
             .FirstOrDefaultAsync(x => x.Id == productId);
         }
 
-        public override Task<bool> Delete(Product entity)
+        public override void Delete(Product entity)
         {
             throw new NotImplementedException();
         }
