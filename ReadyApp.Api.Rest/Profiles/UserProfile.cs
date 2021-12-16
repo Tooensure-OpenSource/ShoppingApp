@@ -1,5 +1,6 @@
 using AutoMapper;
 using shoppingApp.Data.DbSet;
+using ShoppingApp.Data.DTOs.Incoming.UpdateDto;
 using ShoppingApp.Data.DTOs.UserDto;
 
 namespace ReadyApp.Api.Rest.Profiles
@@ -8,6 +9,21 @@ namespace ReadyApp.Api.Rest.Profiles
     {
         public UserProfile()
         {
+            CreateMap<User, UserUpdateDto>()
+                .ForMember(
+                    dest => dest.FirstName,
+                    otp => otp.MapFrom(src => src.FristName))
+                .ForMember(
+                    dest => dest.LastName,
+                    otp => otp.MapFrom(src => src.LastName));
+            CreateMap<UserUpdateDto, User>()
+                .ForMember(
+                    dest => dest.FristName,
+                    otp => otp.MapFrom(src => src.FirstName))
+                .ForMember(
+                    dest => dest.LastName,
+                    otp => otp.MapFrom(src => src.LastName));
+
             CreateMap<AddUserDto, User>()
                 .ForMember(
                     dest => dest.FristName,
@@ -45,3 +61,4 @@ namespace ReadyApp.Api.Rest.Profiles
         }
     }
 }
+// UserUpdateDto
