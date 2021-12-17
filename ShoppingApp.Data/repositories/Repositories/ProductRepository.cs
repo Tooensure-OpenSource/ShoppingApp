@@ -33,16 +33,6 @@ namespace shoppingApp.Data.repositories.Repositories
             .AnyAsync(x => x.Id == productId);
         }
 
-        public async Task<bool> IsUserOfBusiness(Guid userId, Guid businessId)
-        {
-            var filterbusiness = await _dbSet
-            .Include(x => x.Business)
-            .Where(x => x.Business.Users.Any(x => x.Id == userId))
-            .AnyAsync(x => x.BusinessId == businessId);
-
-            return filterbusiness;
-        }
-
         public Task<bool> BusinessExist(Guid businessId)
         {
             throw new NotImplementedException();
@@ -51,9 +41,23 @@ namespace shoppingApp.Data.repositories.Repositories
         public async Task<bool> IsProductOfBusiness(Guid productId, Guid businessId)
         {
             var filterbusiness = await _dbSet
-            .Include(x => x.Business)
-            .Where(x => x.Business.Products.Any(x => x.Id == productId))
-            .AnyAsync(x => x.BusinessId == businessId);
+            .Include(x => x.Businesses)
+            .ThenInclude(x => x.Users)
+            .Where(x => x.Businesses.Any(x => x.Id == businessId))
+            .AnyAsync(x => x.Id == productId);
+
+            return filterbusiness;
+        }
+
+        public async Task<bool> CanAddProduct(Guid userId, Guid businessId, Guid productId)
+        {
+            var filterbusiness = await _dbSet
+            .Include(x => x.Businesses)
+            .ThenInclude(x => x.Users)
+            .Where(x => x.Businesses
+            .Any(x => x.Id == businessId && 
+            x.Users.Any(i => i.Id == userId)))
+            .AnyAsync(x => x.Id == productId);
 
             return filterbusiness;
         }
@@ -62,7 +66,9 @@ namespace shoppingApp.Data.repositories.Repositories
         {
             // Store data in a collection ready for filtering
             var collection = await _dbSet
-            .Where(x => x.Name.Contains(searchQuery.ProductName) && x.BusinessId == searchQuery.BusinessId)
+            .Include(x=>x.Businesses)
+            .Where(x => x.Name.Contains(searchQuery.ProductName))
+            .Where(x => x.Businesses.Any(x=>x.Id == searchQuery.BusinessId))
             .ToListAsync();
             return collection;
         }
