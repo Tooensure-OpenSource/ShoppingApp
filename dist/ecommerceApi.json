@@ -1,0 +1,1871 @@
+{
+    "openapi": "3.0.1",
+    
+    "info": {
+    "title": "Library API",
+    "version": "1"
+    },
+    
+    "paths": {
+    
+    "/api/v{version}/Businesses": {
+    
+    "options": {
+    
+    "tags": [
+    "Businesses"
+    ],
+    
+    "parameters": [
+    
+    {
+    "name": "version",
+    "in": "path",
+    "required": true,
+    
+    "schema": {
+    "type": "string"
+    }
+    }
+    ],
+    
+    "responses": {
+    
+    "200": {
+    "description": "Success"
+    }
+    }
+    },
+    
+    "post": {
+    
+    "tags": [
+    "Businesses"
+    ],
+    
+    "parameters": [
+    
+    {
+    "name": "version",
+    "in": "path",
+    "required": true,
+    
+    "schema": {
+    "type": "string"
+    }
+    }
+    ],
+    
+    "requestBody": {
+    
+    "content": {
+    
+    "application/xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddBusinessDto"
+    }
+    },
+    
+    "text/xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddBusinessDto"
+    }
+    },
+    
+    "application/*+xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddBusinessDto"
+    }
+    },
+    
+    "application/json-patch+json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddBusinessDto"
+    }
+    },
+    
+    "application/json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddBusinessDto"
+    }
+    },
+    
+    "text/json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddBusinessDto"
+    }
+    },
+    
+    "application/*+json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddBusinessDto"
+    }
+    }
+    }
+    },
+    
+    "responses": {
+    
+    "200": {
+    "description": "Success",
+    
+    "content": {
+    
+    "text/plain": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/BusinessDto"
+    }
+    },
+    
+    "application/xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/BusinessDto"
+    }
+    },
+    
+    "text/xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/BusinessDto"
+    }
+    },
+    
+    "application/json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/BusinessDto"
+    }
+    },
+    
+    "text/json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/BusinessDto"
+    }
+    }
+    }
+    }
+    }
+    },
+    
+    "get": {
+    
+    "tags": [
+    "Businesses"
+    ],
+    
+    "parameters": [
+    
+    {
+    "name": "searchQuery",
+    "in": "query",
+    
+    "schema": {
+    "$ref": "#/components/schemas/BusinessSearch"
+    }
+    },
+    
+    {
+    "name": "version",
+    "in": "path",
+    "required": true,
+    
+    "schema": {
+    "type": "string"
+    }
+    }
+    ],
+    
+    "responses": {
+    
+    "200": {
+    "description": "Success",
+    
+    "content": {
+    
+    "text/plain": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/BusinessDto"
+    }
+    }
+    },
+    
+    "application/xml": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/BusinessDto"
+    }
+    }
+    },
+    
+    "text/xml": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/BusinessDto"
+    }
+    }
+    },
+    
+    "application/json": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/BusinessDto"
+    }
+    }
+    },
+    
+    "text/json": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/BusinessDto"
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+    },
+    
+    "/api/v{version}/Businesses/{businessId}": {
+    
+    "get": {
+    
+    "tags": [
+    "Businesses"
+    ],
+    
+    "parameters": [
+    
+    {
+    "name": "businessId",
+    "in": "path",
+    "required": true,
+    
+    "schema": {
+    "type": "string",
+    "format": "uuid"
+    }
+    },
+    
+    {
+    "name": "version",
+    "in": "path",
+    "required": true,
+    
+    "schema": {
+    "type": "string"
+    }
+    }
+    ],
+    
+    "responses": {
+    
+    "200": {
+    "description": "Success",
+    
+    "content": {
+    
+    "text/plain": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/BusinessDto"
+    }
+    },
+    
+    "application/xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/BusinessDto"
+    }
+    },
+    
+    "text/xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/BusinessDto"
+    }
+    },
+    
+    "application/json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/BusinessDto"
+    }
+    },
+    
+    "text/json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/BusinessDto"
+    }
+    }
+    }
+    }
+    }
+    },
+    
+    "delete": {
+    
+    "tags": [
+    "Businesses"
+    ],
+    
+    "parameters": [
+    
+    {
+    "name": "businessId",
+    "in": "path",
+    "required": true,
+    
+    "schema": {
+    "type": "string",
+    "format": "uuid"
+    }
+    },
+    
+    {
+    "name": "version",
+    "in": "path",
+    "required": true,
+    
+    "schema": {
+    "type": "string"
+    }
+    }
+    ],
+    
+    "responses": {
+    
+    "200": {
+    "description": "Success"
+    }
+    }
+    }
+    },
+    
+    "/api/v{version}/Orders": {
+    
+    "post": {
+    
+    "tags": [
+    "Orders"
+    ],
+    
+    "parameters": [
+    
+    {
+    "name": "version",
+    "in": "path",
+    "required": true,
+    
+    "schema": {
+    "type": "string"
+    }
+    }
+    ],
+    
+    "requestBody": {
+    
+    "content": {
+    
+    "application/xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddOrderDto"
+    }
+    },
+    
+    "text/xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddOrderDto"
+    }
+    },
+    
+    "application/*+xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddOrderDto"
+    }
+    },
+    
+    "application/json-patch+json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddOrderDto"
+    }
+    },
+    
+    "application/json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddOrderDto"
+    }
+    },
+    
+    "text/json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddOrderDto"
+    }
+    },
+    
+    "application/*+json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddOrderDto"
+    }
+    }
+    }
+    },
+    
+    "responses": {
+    
+    "200": {
+    "description": "Success",
+    
+    "content": {
+    
+    "text/plain": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/OrderDto"
+    }
+    },
+    
+    "application/xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/OrderDto"
+    }
+    },
+    
+    "text/xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/OrderDto"
+    }
+    },
+    
+    "application/json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/OrderDto"
+    }
+    },
+    
+    "text/json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/OrderDto"
+    }
+    }
+    }
+    }
+    }
+    },
+    
+    "get": {
+    
+    "tags": [
+    "Orders"
+    ],
+    
+    "parameters": [
+    
+    {
+    "name": "searchQuery",
+    "in": "query",
+    
+    "schema": {
+    "$ref": "#/components/schemas/OrderSearch"
+    }
+    },
+    
+    {
+    "name": "version",
+    "in": "path",
+    "required": true,
+    
+    "schema": {
+    "type": "string"
+    }
+    }
+    ],
+    
+    "responses": {
+    
+    "200": {
+    "description": "Success",
+    
+    "content": {
+    
+    "text/plain": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/OrderDto"
+    }
+    }
+    },
+    
+    "application/xml": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/OrderDto"
+    }
+    }
+    },
+    
+    "text/xml": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/OrderDto"
+    }
+    }
+    },
+    
+    "application/json": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/OrderDto"
+    }
+    }
+    },
+    
+    "text/json": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/OrderDto"
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+    },
+    
+    "/api/v{version}/Orders/{orderId}": {
+    
+    "get": {
+    
+    "tags": [
+    "Orders"
+    ],
+    
+    "parameters": [
+    
+    {
+    "name": "orderId",
+    "in": "path",
+    "required": true,
+    
+    "schema": {
+    "type": "string",
+    "format": "uuid"
+    }
+    },
+    
+    {
+    "name": "version",
+    "in": "path",
+    "required": true,
+    
+    "schema": {
+    "type": "string"
+    }
+    }
+    ],
+    
+    "responses": {
+    
+    "200": {
+    "description": "Success",
+    
+    "content": {
+    
+    "text/plain": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/OrderDto"
+    }
+    },
+    
+    "application/xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/OrderDto"
+    }
+    },
+    
+    "text/xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/OrderDto"
+    }
+    },
+    
+    "application/json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/OrderDto"
+    }
+    },
+    
+    "text/json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/OrderDto"
+    }
+    }
+    }
+    }
+    }
+    }
+    },
+    
+    "/api/v{version}/Products": {
+    
+    "post": {
+    
+    "tags": [
+    "Products"
+    ],
+    
+    "parameters": [
+    
+    {
+    "name": "version",
+    "in": "path",
+    "required": true,
+    
+    "schema": {
+    "type": "string"
+    }
+    }
+    ],
+    
+    "requestBody": {
+    
+    "content": {
+    
+    "application/xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddProductDto"
+    }
+    },
+    
+    "text/xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddProductDto"
+    }
+    },
+    
+    "application/*+xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddProductDto"
+    }
+    },
+    
+    "application/json-patch+json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddProductDto"
+    }
+    },
+    
+    "application/json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddProductDto"
+    }
+    },
+    
+    "text/json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddProductDto"
+    }
+    },
+    
+    "application/*+json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddProductDto"
+    }
+    }
+    }
+    },
+    
+    "responses": {
+    
+    "200": {
+    "description": "Success",
+    
+    "content": {
+    
+    "text/plain": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/ProductDto"
+    }
+    },
+    
+    "application/xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/ProductDto"
+    }
+    },
+    
+    "text/xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/ProductDto"
+    }
+    },
+    
+    "application/json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/ProductDto"
+    }
+    },
+    
+    "text/json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/ProductDto"
+    }
+    }
+    }
+    }
+    }
+    },
+    
+    "get": {
+    
+    "tags": [
+    "Products"
+    ],
+    
+    "parameters": [
+    
+    {
+    "name": "BusinessId",
+    "in": "query",
+    
+    "schema": {
+    "type": "string",
+    "format": "uuid"
+    }
+    },
+    
+    {
+    "name": "ProductName",
+    "in": "query",
+    
+    "schema": {
+    "type": "string"
+    }
+    },
+    
+    {
+    "name": "version",
+    "in": "path",
+    "required": true,
+    
+    "schema": {
+    "type": "string"
+    }
+    }
+    ],
+    
+    "responses": {
+    
+    "200": {
+    "description": "Success",
+    
+    "content": {
+    
+    "text/plain": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/ProductDto"
+    }
+    }
+    },
+    
+    "application/xml": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/ProductDto"
+    }
+    }
+    },
+    
+    "text/xml": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/ProductDto"
+    }
+    }
+    },
+    
+    "application/json": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/ProductDto"
+    }
+    }
+    },
+    
+    "text/json": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/ProductDto"
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+    },
+    
+    "/api/v{version}/Products/{productId}": {
+    
+    "get": {
+    
+    "tags": [
+    "Products"
+    ],
+    
+    "parameters": [
+    
+    {
+    "name": "productId",
+    "in": "path",
+    "required": true,
+    
+    "schema": {
+    "type": "string",
+    "format": "uuid"
+    }
+    },
+    
+    {
+    "name": "version",
+    "in": "path",
+    "required": true,
+    
+    "schema": {
+    "type": "string"
+    }
+    }
+    ],
+    
+    "responses": {
+    
+    "200": {
+    "description": "Success",
+    
+    "content": {
+    
+    "text/plain": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/ProductDto"
+    }
+    },
+    
+    "application/xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/ProductDto"
+    }
+    },
+    
+    "text/xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/ProductDto"
+    }
+    },
+    
+    "application/json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/ProductDto"
+    }
+    },
+    
+    "text/json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/ProductDto"
+    }
+    }
+    }
+    }
+    }
+    }
+    },
+    
+    "/api/v{version}/Users/{userId}": {
+    
+    "get": {
+    
+    "tags": [
+    "Users"
+    ],
+    "summary": "Get user by his/her id",
+    
+    "parameters": [
+    
+    {
+    "name": "userId",
+    "in": "path",
+    "description": "The ID of the user you want to get",
+    "required": true,
+    
+    "schema": {
+    "type": "string",
+    "format": "uuid"
+    }
+    },
+    
+    {
+    "name": "version",
+    "in": "path",
+    "required": true,
+    
+    "schema": {
+    "type": "string"
+    }
+    }
+    ],
+    
+    "responses": {
+    
+    "200": {
+    "description": "Success",
+    
+    "content": {
+    
+    "text/plain": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/UserDto"
+    }
+    },
+    
+    "application/xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/UserDto"
+    }
+    },
+    
+    "text/xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/UserDto"
+    }
+    },
+    
+    "application/json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/UserDto"
+    }
+    },
+    
+    "text/json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/UserDto"
+    }
+    }
+    }
+    }
+    }
+    },
+    
+    "patch": {
+    
+    "tags": [
+    "Users"
+    ],
+    
+    "parameters": [
+    
+    {
+    "name": "userId",
+    "in": "path",
+    "required": true,
+    
+    "schema": {
+    "type": "string",
+    "format": "uuid"
+    }
+    },
+    
+    {
+    "name": "version",
+    "in": "path",
+    "required": true,
+    
+    "schema": {
+    "type": "string"
+    }
+    }
+    ],
+    
+    "requestBody": {
+    
+    "content": {
+    
+    "application/xml": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/Operation"
+    }
+    }
+    },
+    
+    "text/xml": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/Operation"
+    }
+    }
+    },
+    
+    "application/*+xml": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/Operation"
+    }
+    }
+    },
+    
+    "application/json-patch+json": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/Operation"
+    }
+    }
+    },
+    
+    "application/json": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/Operation"
+    }
+    }
+    },
+    
+    "text/json": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/Operation"
+    }
+    }
+    },
+    
+    "application/*+json": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/Operation"
+    }
+    }
+    }
+    }
+    },
+    
+    "responses": {
+    
+    "200": {
+    "description": "Success"
+    }
+    }
+    }
+    },
+    
+    "/api/v{version}/Users": {
+    
+    "post": {
+    
+    "tags": [
+    "Users"
+    ],
+    "summary": "Create user by transfer properties",
+    
+    "parameters": [
+    
+    {
+    "name": "version",
+    "in": "path",
+    "required": true,
+    
+    "schema": {
+    "type": "string"
+    }
+    }
+    ],
+    
+    "requestBody": {
+    "description": "There must not be another user with exact username else bad request",
+    
+    "content": {
+    
+    "application/xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddUserDto"
+    }
+    },
+    
+    "text/xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddUserDto"
+    }
+    },
+    
+    "application/*+xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddUserDto"
+    }
+    },
+    
+    "application/json-patch+json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddUserDto"
+    }
+    },
+    
+    "application/json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddUserDto"
+    }
+    },
+    
+    "text/json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddUserDto"
+    }
+    },
+    
+    "application/*+json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/AddUserDto"
+    }
+    }
+    }
+    },
+    
+    "responses": {
+    
+    "200": {
+    "description": "Success",
+    
+    "content": {
+    
+    "text/plain": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/UserDto"
+    }
+    },
+    
+    "application/xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/UserDto"
+    }
+    },
+    
+    "text/xml": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/UserDto"
+    }
+    },
+    
+    "application/json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/UserDto"
+    }
+    },
+    
+    "text/json": {
+    
+    "schema": {
+    "$ref": "#/components/schemas/UserDto"
+    }
+    }
+    }
+    }
+    }
+    },
+    
+    "get": {
+    
+    "tags": [
+    "Users"
+    ],
+    
+    "parameters": [
+    
+    {
+    "name": "Username",
+    "in": "query",
+    
+    "schema": {
+    "type": "string"
+    }
+    },
+    
+    {
+    "name": "version",
+    "in": "path",
+    "required": true,
+    
+    "schema": {
+    "type": "string"
+    }
+    }
+    ],
+    
+    "responses": {
+    
+    "200": {
+    "description": "Success",
+    
+    "content": {
+    
+    "text/plain": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/UserDto"
+    }
+    }
+    },
+    
+    "application/xml": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/UserDto"
+    }
+    }
+    },
+    
+    "text/xml": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/UserDto"
+    }
+    }
+    },
+    
+    "application/json": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/UserDto"
+    }
+    }
+    },
+    
+    "text/json": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/UserDto"
+    }
+    }
+    }
+    }
+    }
+    }
+    },
+    
+    "head": {
+    
+    "tags": [
+    "Users"
+    ],
+    
+    "parameters": [
+    
+    {
+    "name": "Username",
+    "in": "query",
+    
+    "schema": {
+    "type": "string"
+    }
+    },
+    
+    {
+    "name": "version",
+    "in": "path",
+    "required": true,
+    
+    "schema": {
+    "type": "string"
+    }
+    }
+    ],
+    
+    "responses": {
+    
+    "200": {
+    "description": "Success",
+    
+    "content": {
+    
+    "text/plain": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/UserDto"
+    }
+    }
+    },
+    
+    "application/xml": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/UserDto"
+    }
+    }
+    },
+    
+    "text/xml": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/UserDto"
+    }
+    }
+    },
+    
+    "application/json": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/UserDto"
+    }
+    }
+    },
+    
+    "text/json": {
+    
+    "schema": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/UserDto"
+    }
+    }
+    }
+    }
+    }
+    }
+    },
+    
+    "options": {
+    
+    "tags": [
+    "Users"
+    ],
+    
+    "parameters": [
+    
+    {
+    "name": "version",
+    "in": "path",
+    "required": true,
+    
+    "schema": {
+    "type": "string"
+    }
+    }
+    ],
+    
+    "responses": {
+    
+    "200": {
+    "description": "Success"
+    }
+    }
+    }
+    }
+    },
+    
+    "components": {
+    
+    "schemas": {
+    
+    "AddBusinessDto": {
+    
+    "required": [
+    "businessId",
+    "name",
+    "userId"
+    ],
+    "type": "object",
+    
+    "properties": {
+    
+    "businessId": {
+    "type": "string",
+    "format": "uuid"
+    },
+    
+    "userId": {
+    "type": "string",
+    "format": "uuid"
+    },
+    
+    "name": {
+    "type": "string"
+    }
+    },
+    "additionalProperties": false
+    },
+    
+    "AddOrderDto": {
+    "type": "object",
+    
+    "properties": {
+    
+    "userId": {
+    "type": "string",
+    "format": "uuid"
+    },
+    
+    "businessId": {
+    "type": "string",
+    "format": "uuid"
+    },
+    
+    "orderItems": {
+    "type": "array",
+    
+    "items": {
+    "$ref": "#/components/schemas/AddOrderItemDto"
+    },
+    "nullable": true
+    }
+    },
+    "additionalProperties": false
+    },
+    
+    "AddOrderItemDto": {
+    "type": "object",
+    
+    "properties": {
+    
+    "quantity": {
+    "type": "integer",
+    "format": "int32"
+    },
+    
+    "productId": {
+    "type": "string",
+    "format": "uuid"
+    }
+    },
+    "additionalProperties": false
+    },
+    
+    "AddProductDto": {
+    
+    "required": [
+    "businessId",
+    "name",
+    "userId"
+    ],
+    "type": "object",
+    
+    "properties": {
+    
+    "businessId": {
+    "type": "string",
+    "format": "uuid"
+    },
+    
+    "userId": {
+    "type": "string",
+    "format": "uuid"
+    },
+    
+    "name": {
+    "type": "string"
+    },
+    
+    "cost": {
+    "type": "number",
+    "format": "double"
+    }
+    },
+    "additionalProperties": false
+    },
+    
+    "AddUserDto": {
+    
+    "required": [
+    "emailAddress",
+    "firstName",
+    "lastName",
+    "username"
+    ],
+    "type": "object",
+    
+    "properties": {
+    
+    "firstName": {
+    "type": "string"
+    },
+    
+    "lastName": {
+    "type": "string"
+    },
+    
+    "username": {
+    "type": "string"
+    },
+    
+    "emailAddress": {
+    "type": "string",
+    "format": "email"
+    }
+    },
+    "additionalProperties": false
+    },
+    
+    "BusinessDto": {
+    
+    "required": [
+    "name"
+    ],
+    "type": "object",
+    
+    "properties": {
+    
+    "id": {
+    "type": "string",
+    "format": "uuid"
+    },
+    
+    "name": {
+    "type": "string"
+    },
+    
+    "products": {
+    "type": "integer",
+    "format": "int32"
+    },
+    
+    "orders": {
+    "type": "integer",
+    "format": "int32"
+    },
+    
+    "users": {
+    "type": "integer",
+    "format": "int32"
+    },
+    
+    "dateCreated": {
+    "type": "string",
+    "format": "date-time"
+    }
+    },
+    "additionalProperties": false
+    },
+    
+    "BusinessSearch": {
+    "type": "object",
+    "additionalProperties": false
+    },
+    
+    "Operation": {
+    "type": "object",
+    
+    "properties": {
+    
+    "operationType": {
+    "$ref": "#/components/schemas/OperationType"
+    },
+    
+    "path": {
+    "type": "string",
+    "nullable": true
+    },
+    
+    "op": {
+    "type": "string",
+    "nullable": true
+    },
+    
+    "from": {
+    "type": "string",
+    "nullable": true
+    },
+    
+    "value": {
+    "nullable": true
+    }
+    },
+    "additionalProperties": false
+    },
+    
+    "OperationType": {
+    
+    "enum": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+    ],
+    "type": "integer",
+    "format": "int32"
+    },
+    
+    "OrderDto": {
+    "type": "object",
+    
+    "properties": {
+    
+    "id": {
+    "type": "string",
+    "format": "uuid"
+    },
+    
+    "userId": {
+    "type": "string",
+    "format": "uuid"
+    },
+    
+    "businessId": {
+    "type": "string",
+    "format": "uuid"
+    },
+    
+    "orderItems": {
+    "type": "integer",
+    "format": "int32"
+    },
+    
+    "dateCreated": {
+    "type": "string",
+    "format": "date-time"
+    }
+    },
+    "additionalProperties": false
+    },
+    
+    "OrderSearch": {
+    "type": "object",
+    "additionalProperties": false
+    },
+    
+    "ProductDto": {
+    "type": "object",
+    
+    "properties": {
+    
+    "id": {
+    "type": "string",
+    "format": "uuid"
+    },
+    
+    "name": {
+    "type": "string",
+    "nullable": true
+    },
+    
+    "cost": {
+    "type": "number",
+    "format": "double"
+    },
+    
+    "businessId": {
+    "type": "string",
+    "format": "uuid"
+    },
+    
+    "dateCreated": {
+    "type": "string",
+    "format": "date-time"
+    }
+    },
+    "additionalProperties": false
+    },
+    
+    "UserDto": {
+    "type": "object",
+    
+    "properties": {
+    
+    "id": {
+    "type": "string",
+    "format": "uuid"
+    },
+    
+    "firstName": {
+    "type": "string",
+    "nullable": true
+    },
+    
+    "lastName": {
+    "type": "string",
+    "nullable": true
+    },
+    
+    "username": {
+    "type": "string",
+    "nullable": true
+    },
+    
+    "emailAddress": {
+    "type": "string",
+    "nullable": true
+    },
+    
+    "orders": {
+    "type": "integer",
+    "format": "int32"
+    },
+    
+    "businesses": {
+    "type": "integer",
+    "format": "int32"
+    },
+    
+    "dateCreated": {
+    "type": "string",
+    "format": "date-time"
+    }
+    },
+    "additionalProperties": false
+    }
+    }
+    }
+    }

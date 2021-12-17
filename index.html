@@ -35,11 +35,11 @@
 
     <script src="./dist/swagger-ui-bundle.js" charset="UTF-8"> </script>
     <script src="./dist/swagger-ui-standalone-preset.js" charset="UTF-8"> </script>
-    <script>
+    <script>//https://petstore.swagger.io/v2/swagger.json
     window.onload = function() {
       // Begin Swagger UI call region
       const ui = SwaggerUIBundle({
-        url: "https://petstore.swagger.io/v2/swagger.json",
+        url: "./dist/swagger-ui-standalone-preset.js",
         dom_id: '#swagger-ui',
         deepLinking: true,
         presets: [
