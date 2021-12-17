@@ -12,13 +12,13 @@ namespace ReadyApp.Api.Rest.Profiles
             CreateMap<User, UserUpdateDto>()
                 .ForMember(
                     dest => dest.FirstName,
-                    otp => otp.MapFrom(src => src.FristName))
+                    otp => otp.MapFrom(src => src.FirstName))
                 .ForMember(
                     dest => dest.LastName,
                     otp => otp.MapFrom(src => src.LastName));
             CreateMap<UserUpdateDto, User>()
                 .ForMember(
-                    dest => dest.FristName,
+                    dest => dest.FirstName,
                     otp => otp.MapFrom(src => src.FirstName))
                 .ForMember(
                     dest => dest.LastName,
@@ -26,7 +26,7 @@ namespace ReadyApp.Api.Rest.Profiles
 
             CreateMap<AddUserDto, User>()
                 .ForMember(
-                    dest => dest.FristName,
+                    dest => dest.FirstName,
                     otp => otp.MapFrom(src => src.FirstName))
                 .ForMember(
                     dest => dest.LastName,
@@ -41,16 +41,13 @@ namespace ReadyApp.Api.Rest.Profiles
                     otp => otp.MapFrom(src => src.Id))
                 .ForMember(
                     dest => dest.FirstName,
-                    otp => otp.MapFrom(src => src.FristName))
+                    otp => otp.MapFrom(src => src.FirstName))
                 .ForMember(
                     dest => dest.LastName,
                     otp => otp.MapFrom(src => src.LastName))
                 .ForMember(
                     dest => dest.EmailAddress,
                     otp => otp.MapFrom(src => src.EmailAddress))
-                .ForMember(
-                    dest => dest.DateCreated,
-                    otp => otp.MapFrom(src => src.DateCreated))
                 .ForMember(
                     dest => dest.Orders,
                     otp => otp.MapFrom(src => src.Orders.Count()))

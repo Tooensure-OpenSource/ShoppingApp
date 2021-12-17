@@ -11,12 +11,6 @@ namespace ReadyApp.Api.Rest.Profiles
         {
             CreateMap<AddOrderDto, Order>()
                 .ForMember(
-                    dest => dest.UserId,
-                    otp => otp.MapFrom(src => src.UserId))
-                .ForMember(
-                    dest => dest.BusinessId,
-                    otp => otp.MapFrom(src => src.BusinessId))
-                .ForMember(
                     dest => dest.OrderItems,
                     otp => otp.Ignore());
 
@@ -25,17 +19,8 @@ namespace ReadyApp.Api.Rest.Profiles
                     dest => dest.Id,
                     otp => otp.MapFrom(src => src.Id))
                 .ForMember(
-                    dest => dest.UserId,
-                    otp => otp.MapFrom(src => src.UserId))
-                .ForMember(
-                    dest => dest.BusinessId,
-                    otp => otp.MapFrom(src => src.BusinessId))
-                .ForMember(
                     dest => dest.OrderItems,
-                    otp => otp.MapFrom(src => src.OrderItems.Count()))
-                .ForMember(
-                    dest => dest.DateCreated,
-                    otp => otp.MapFrom(src => src.DateCreated));
+                    otp => otp.MapFrom(src => src.OrderItems.Count()));
         }
     }
 }
