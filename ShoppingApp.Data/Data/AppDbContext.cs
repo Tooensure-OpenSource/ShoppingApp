@@ -5,7 +5,7 @@ namespace shoppingApp.Data.Data
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> dbContextOptions) : base(dbContextOptions) { }
+        // public AppDbContext(DbContextOptions<AppDbContext> dbContextOptions) : base(dbContextOptions) { }
 
         public DbSet<User>? Users { get; set; }
         public DbSet<Business>? Businesses { get; set; }
@@ -14,9 +14,9 @@ namespace shoppingApp.Data.Data
         public DbSet<Order>? OrderItems { get; set; }
 
 
-        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        // {
-        //     optionsBuilder.UseSqlServer("Data Source=DESKTOP-5FSN0VL\\TOOENSURE; Initial Catalog=Ecommercedb; Integrated Security=True");
-        // }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("Data Source=DESKTOP-5FSN0VL\\TOOENSURE; Initial Catalog=ShoppingApp; Integrated Security=True");
+        }
     }
 }
