@@ -15,7 +15,7 @@ namespace ShoppingApp.Data.repositories.Repositories
         public async override Task<IEnumerable<OrderItem>> All()
         {
             return await _dbSet
-            .Include(x => x.Product)
+            .Include(x => x.Products)
             .ToListAsync();
         }
 
