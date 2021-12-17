@@ -18,6 +18,7 @@ namespace shoppingApp.Data.DbSet
         [Required, MaxLength(20)]
         public string Name { get; set; } = string.Empty;
         public decimal Cost { get; set; }
+        public List<OrderItem> OrderItems { get; set; } = new();
         public List<Business> Businesses { get; set; } = new();
         // [ForeignKey("id")]
         // public Guid BusinessId { get; set; }

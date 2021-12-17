@@ -5,18 +5,10 @@ namespace ShoppingApp.Data.DbSet
 {
     public class OrderItem : EntityBase
     {
-       
         public int Quantity { get; set; } = 1;
-
-        [ForeignKey("id")]
-        public Guid ProductId { get; set; }
-        public Product? Product { get; set; } = null;
-
-
-        public OrderItem(Guid productId, int quantity)
-        {
-            ProductId = productId;
-            Quantity = quantity;
-        }
+        // yes, List of products can be passed allowing the power
+        // of each product has a quantity of 2
+        public List<Product> Products { get; set; } = new();
+        public List<Order> Orders { get; set; } = new();
     }
 }

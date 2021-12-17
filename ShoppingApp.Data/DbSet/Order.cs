@@ -20,10 +20,6 @@ namespace shoppingApp.Data.DbSet
         public List<User> Users { get; set; } = new();
         public List<OrderItem> OrderItems { get; set; } = new();
         public List<Business> Businesses { get; set; } = new();
-        // [ForeignKey("id")]
-        // public Guid BusinessId { get; set; }
-        // public Business? Business { get; set; } = null;
-
         public decimal Total { get; set; }
     }
 }

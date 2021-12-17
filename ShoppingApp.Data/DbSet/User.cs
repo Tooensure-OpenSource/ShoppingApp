@@ -16,22 +16,33 @@ namespace shoppingApp.Data.DbSet
     [Table("Users")]
     public class User : EntityBase
     {
+        ///<summary>
+        /// The first name of the user
+        ///</summary>
         [Required, MaxLength(50)]
         public string? FirstName { get; set; }
+        ///<summary>
+        /// The last name of the user
+        ///</summary>
         [Required, MaxLength(50)]
         public string? LastName { get; set; }
+        ///<summary>
+        /// The username of the user
+        ///</summary>
         [Required, MaxLength(100)]
         public string? Username { get; set; } = null;
+        ///<summary>
+        /// The email of the user
+        ///</summary>
         [Required,EmailAddress, MaxLength(50)]
         public string EmailAddress { get; set; } = String.Empty;
-        /// Recipt Feature needed, because how else can user
-        /// access there product and/or orders when business deletes,
-        /// add and save this data into new Recipt
-        /// For now this issue is patched with a enum specifing if
-        /// the status of object object is active, deactive, etc.
-        /// TIP: if business has never made a order then full delete
-        /// is very much able and will defualt to conflict
+        ///<summary>
+        /// The orders the user made
+        ///</summary>
         public List<Order> Orders { get; } = new();
+        ///<summary>
+        /// The businesses the user created
+        ///</summary>
         public List<Business> Businesses { get; } = new();
 
     }
