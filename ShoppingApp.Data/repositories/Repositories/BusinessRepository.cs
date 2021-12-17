@@ -31,5 +31,21 @@ namespace shoppingApp.Data.repositories.Repositories
             return await _dbSet
             .AnyAsync(x => x.Id == businessId);
         }
+
+
+        ///<summary>
+        /// Where else isn't better then checking if the user is
+        /// in fact a business owner of this business
+        /// NOTE: This may need some modifications
+        ///</summary>
+        public async Task<bool> IsOwnerOfBusiness(Guid userId, Guid businessId)
+        {
+            var filterbusiness = await _dbSet
+            .Include(x => x.Users)
+            .Where(x => x.Users.Any(x => x.Id == userId))
+            .AnyAsync(x => x.Id == businessId);
+
+            return filterbusiness;
+        }
     }
 }

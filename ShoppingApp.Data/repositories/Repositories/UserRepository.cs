@@ -9,7 +9,6 @@ namespace shoppingApp.Data.repositories.Repositories
         public UserRepository(DbContext context) : base(context)
         {
         }
-        public void Upsert(User user) { }
         public override async Task<IEnumerable<User>> All()
         {
             return await _dbSet
@@ -29,11 +28,6 @@ namespace shoppingApp.Data.repositories.Repositories
         {
             return await _dbSet
             .AnyAsync(x => x.Id == userId);
-        }
-
-        public override void Delete(User entity)
-        {
-            throw new NotImplementedException();
         }
     }
 }

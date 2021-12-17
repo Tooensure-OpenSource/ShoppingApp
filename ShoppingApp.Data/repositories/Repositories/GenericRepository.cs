@@ -18,19 +18,26 @@ namespace shoppingApp.Data.repositories.Repositories
             return true;
         }
 
-        public virtual void  Delete(T entity)
-        {
-
+        // Removing a items can be quite challanging
+        // One must know when and doing so means at the best time possible
+        // Most time delete can be done by upserting the the Object status to 0
+        // else some action must triger 
+        public virtual void  Delete(T entity) 
+        { 
+            _dbSet.Remove(entity);
         }
+        public virtual void  Upsert(T entity) { }
 
         public virtual async Task<IEnumerable<T>> All()
-        {
-            return await _dbSet.ToListAsync();
+        { 
+            return await _dbSet
+            .ToListAsync(); 
         }
 
         public virtual async Task<T?> Get(Guid Id)
-        {
-            return await _dbSet.FirstOrDefaultAsync();
+        { 
+            return await _dbSet
+            .FirstOrDefaultAsync(); 
         }
     }
 }
