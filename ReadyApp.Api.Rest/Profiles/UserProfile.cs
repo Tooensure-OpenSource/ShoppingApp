@@ -32,6 +32,9 @@ namespace ReadyApp.Api.Rest.Profiles
                     dest => dest.LastName,
                     otp => otp.MapFrom(src => src.LastName))
                 .ForMember(
+                    dest => dest.Username,
+                    otp => otp.MapFrom(src => src.Username))
+                .ForMember(
                     dest => dest.EmailAddress,
                     otp => otp.MapFrom(src => src.EmailAddress));
 
@@ -46,6 +49,9 @@ namespace ReadyApp.Api.Rest.Profiles
                     dest => dest.LastName,
                     otp => otp.MapFrom(src => src.LastName))
                 .ForMember(
+                    dest => dest.Username,
+                    otp => otp.MapFrom(src => src.Username))
+                .ForMember(
                     dest => dest.EmailAddress,
                     otp => otp.MapFrom(src => src.EmailAddress))
                 .ForMember(
@@ -58,4 +64,3 @@ namespace ReadyApp.Api.Rest.Profiles
         }
     }
 }
-// UserUpdateDto
