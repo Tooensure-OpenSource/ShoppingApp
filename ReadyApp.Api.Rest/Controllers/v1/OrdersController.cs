@@ -1,4 +1,5 @@
 using AutoMapper;
+using EcommerceApp.Domain.ResourceParameters.Search;
 using Microsoft.AspNetCore.Mvc;
 using ReadyApp.Api.Rest.Controllers.v1.IControllers;
 using shoppingApp.Data.DbSet;
@@ -9,7 +10,7 @@ using ShoppingApp.Data.DTOs.Outgoing;
 
 namespace ReadyApp.Api.Rest.Controllers.v1
 {
-    public class OrdersController : BaseController<AddOrderDto, OrderDto>
+    public class OrdersController : BaseController<AddOrderDto, OrderDto, OrderSearch>
     {
         public OrdersController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
         {
@@ -18,18 +19,30 @@ namespace ReadyApp.Api.Rest.Controllers.v1
         [HttpPost]
         public override async Task<ActionResult<OrderDto>> Add(AddOrderDto incomming)
         {
+            // See if user with Id infact exist
             var isUser = await _unitOfWork.Users.Exist(incomming.UserId);
             if(!isUser) BadRequest("User don't exist");
-            
-            var orderItems = _mapper.Map<IEnumerable<OrderItem>>(incomming.Products);
-            var order = _mapper.Map<Order>(incomming);
 
-            // Checking if products and business compare/true
-            foreach (var product in orderItems)
+            // Mapping a list of AddOrderItemsDto into OrderItems 
+            var orderItems = _mapper.Map<IEnumerable<AddOrderItemDto>>(incomming.orderItems);
+            // Mapping the incoming object to order
+            var order = _mapper.Map<Order>(incomming);
+            // Checking if products ordering is part of the business products
+            // cause product can't be ordered if the business don't contain the product
+            foreach (var orderItemAdding in orderItems)
             {
-                var isProductOfBusiness = await _unitOfWork.Products.IsProductOfBusiness(product.ProductId, incomming.BusinessId);
+                // Map AddOderItem into a actual order Item
+                var orderItem = _mapper.Map<OrderItem>(orderItemAdding);
+                // Just checking seeing if IsProductOfBusiness is true
+                var isProductOfBusiness = await _unitOfWork.Products.IsProductOfBusiness(orderItemAdding.ProductId, incomming.BusinessId);
                 if(!isProductOfBusiness) return BadRequest("Can't process order");
-                order.OrderItems.Add(product);
+                // When I Call get() product, if include businesses is specified, I may be able to
+                // NOTE: Make sure 
+                var product = await _unitOfWork.Products.Get(orderItemAdding.ProductId);
+                if(product == null) return BadRequest("Can't process order");
+                // Add products into order item befor adding to order
+                orderItem.Products.Add(product);
+                order.OrderItems.Add(orderItem);
             }
 
         
@@ -44,7 +57,7 @@ namespace ReadyApp.Api.Rest.Controllers.v1
         }
 
         [HttpGet]
-        public override async Task<ActionResult<IEnumerable<OrderDto>>> All()
+        public override async Task<ActionResult<IEnumerable<OrderDto>>> All([FromQuery] OrderSearch searchQuery)
         {
             var orders = await _unitOfWork.Orders.All();
             var response = _mapper.Map<IEnumerable<OrderDto>>(orders);

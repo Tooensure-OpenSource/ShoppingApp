@@ -9,7 +9,7 @@ using ShoppingApp.Data.DTOs.Outgoing;
 
 namespace ReadyApp.Api.Rest.Controllers.v1
 {
-    public class ProductsController : BaseController<AddProductDto, ProductDto>, IProductController
+    public class ProductsController : BaseController<AddProductDto, ProductDto, ProductSearch>, IProductController
     {
         public ProductsController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
         {
@@ -40,19 +40,12 @@ namespace ReadyApp.Api.Rest.Controllers.v1
         // Always nice to attach from Query to solve
 
         [HttpGet()]
-        public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts([FromQuery] ProductSearch searchQuery)
+        public async override Task<ActionResult<IEnumerable<ProductDto>>> All([FromQuery] ProductSearch searchQuery)
         {
             var productsFromRepo = await _unitOfWork.Products.GetProducts(searchQuery);
             var products = _mapper.Map<IEnumerable<ProductDto>>(productsFromRepo);
             
             return Ok(products);
-        }
-
-        public async override Task<ActionResult<IEnumerable<ProductDto>>> All()
-        {
-            var products = await _unitOfWork.Products.All();
-            var response = _mapper.Map<IEnumerable<ProductDto>>(products);
-            return Ok(response);  
         }
 
         [HttpGet("{productId}")]

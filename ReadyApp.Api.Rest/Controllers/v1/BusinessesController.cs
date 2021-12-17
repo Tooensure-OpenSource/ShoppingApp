@@ -1,4 +1,5 @@
 using AutoMapper;
+using EcommerceApp.Domain.ResourceParameters.Search;
 using Microsoft.AspNetCore.Mvc;
 using ReadyApp.Api.Rest.Controllers.v1.IControllers;
 using shoppingApp.Data.DbSet;
@@ -8,10 +9,15 @@ using ShoppingApp.Data.DTOs.Outgoing;
 
 namespace ReadyApp.Api.Rest.Controllers.v1
 {
-    public class BusinessesController : BaseController<AddBusinessDto, BusinessDto>, IBusinessController
+    public class BusinessesController : BaseController<AddBusinessDto, BusinessDto, BusinessSearch>, IBusinessController
     {
-        public BusinessesController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
+        public BusinessesController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper) { }
+
+        [HttpOptions()]
+        public IActionResult GetOptions()
         {
+            Response.Headers.Add("Allow", "GET,OPTIONS,POST");
+            return Ok();
         }
 
         [HttpPost]
@@ -33,7 +39,7 @@ namespace ReadyApp.Api.Rest.Controllers.v1
         }
         
         [HttpGet]
-        public async override Task<ActionResult<IEnumerable<BusinessDto>>> All()
+        public async override Task<ActionResult<IEnumerable<BusinessDto>>> All([FromQuery] BusinessSearch searchQuery)
         {
             var businessesFromRepo = await _unitOfWork.Businesses.All();
             var businesses = _mapper.Map<IEnumerable<BusinessDto>>(businessesFromRepo);

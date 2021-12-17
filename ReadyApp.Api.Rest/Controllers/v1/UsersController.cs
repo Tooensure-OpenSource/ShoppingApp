@@ -1,4 +1,5 @@
 using AutoMapper;
+using EcommerceApp.Domain.ResourceParameters.Search;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using ReadyApp.Api.Rest.Controllers.v1.IControllers;
@@ -10,13 +11,18 @@ using ShoppingApp.Data.DTOs.UserDto;
 
 namespace ReadyApp.Api.Rest.Controllers.v1
 {
-    public class UsersController : BaseController<AddUserDto, UserDto>, IUserController
+    public class UsersController : BaseController<AddUserDto, UserDto, UserSearch>, IUserController
     {
         public UsersController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
         {
         }
+
         
-        // [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDto))]
+        /// <summary>
+        /// Get user by his/her id
+        /// </summary>
+        /// <param name="userId">The ID of the user you want to get</param>
+        /// <returns>An user with ID, name and email field</returns>
         [HttpGet("{userId}")]
         [ActionName(nameof(Get))]
         public override async Task<ActionResult<UserDto>> Get(Guid userId)
@@ -26,19 +32,24 @@ namespace ReadyApp.Api.Rest.Controllers.v1
             var response = _mapper.Map<UserDto>(user);
             return Ok(response);
         }
-        // var createdResource = new { Id = 1, Version = "1.0" };
-        // var actionName = nameof(GetValue);
-        // var routeValues = new { id = createdResource.Id, version = createdResource.Version };
-        // return CreatedAtAction(actionName, routeValues, createdResource);
-        // Location: .../api/Values/1?version=1.0
+        /// <summary>
+        /// Create user by transfer properties
+        /// </summary>
+        /// <param name="incomming">There must not be another user with exact username else bad request</param>
+        /// <returns>201 Status code with url in the header.</returns>
         [HttpPost]
         public override async Task<ActionResult<UserDto>> Add([FromBody] AddUserDto incomming)
         {
+            // Map incoming DTO into user
             var user = _mapper.Map<User>(incomming);
-            
+            // Check if username is already taken
+            var isUsername = await _unitOfWork.Users.ExistByUsername(incomming.Username);
+            if (isUsername) return BadRequest("Username already exist");
+            // Quite simple then add the user
             await _unitOfWork.Users.Add(user);
+            // Must complete to apply changes
             await _unitOfWork.CompleteAsync();
-            
+            // Now map user into a user DTO for transfer
             var response = _mapper.Map<UserDto>(user);
             return CreatedAtAction(nameof(Get), new { userId = response.Id}, response);
             // return CreatedAtAction(nameof(GetUser), new {Guid = user.Id}, response);
@@ -46,13 +57,15 @@ namespace ReadyApp.Api.Rest.Controllers.v1
 
         [HttpGet()]
         [HttpHead]
-        public override async Task<ActionResult<IEnumerable<UserDto>>> All()
+        public override async Task<ActionResult<IEnumerable<UserDto>>> All([FromQuery] UserSearch searchQuery)
         {
-            var usersFromRepo = await _unitOfWork.Users.All();
+            // Send search query to repo
+            var usersFromRepo = await _unitOfWork.Users.Search(searchQuery);
+            if(usersFromRepo.Count() <= 0) return NotFound();
             var users = _mapper.Map<IEnumerable<UserDto>>(usersFromRepo);
-            
             return Ok(users);
         }
+        
 
         [HttpOptions]
         
