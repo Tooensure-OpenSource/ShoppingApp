@@ -67,6 +67,36 @@ namespace ShoppingApp.Data.Migrations
                     b.ToTable("BusinessUser");
                 });
 
+            modelBuilder.Entity("OrderItemProduct", b =>
+                {
+                    b.Property<Guid>("OrderItemsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProductsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("OrderItemsId", "ProductsId");
+
+                    b.HasIndex("ProductsId");
+
+                    b.ToTable("OrderItemProduct");
+                });
+
+            modelBuilder.Entity("OrderOrderItem", b =>
+                {
+                    b.Property<Guid>("OrderItemsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("OrdersId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("OrderItemsId", "OrdersId");
+
+                    b.HasIndex("OrdersId");
+
+                    b.ToTable("OrderOrderItem");
+                });
+
             modelBuilder.Entity("OrderUser", b =>
                 {
                     b.Property<Guid>("OrdersId")
@@ -132,12 +162,6 @@ namespace ShoppingApp.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("OrderId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
@@ -145,10 +169,6 @@ namespace ShoppingApp.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("OrderItem");
                 });
@@ -254,6 +274,36 @@ namespace ShoppingApp.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("OrderItemProduct", b =>
+                {
+                    b.HasOne("ShoppingApp.Data.DbSet.OrderItem", null)
+                        .WithMany()
+                        .HasForeignKey("OrderItemsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("shoppingApp.Data.DbSet.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("OrderOrderItem", b =>
+                {
+                    b.HasOne("ShoppingApp.Data.DbSet.OrderItem", null)
+                        .WithMany()
+                        .HasForeignKey("OrderItemsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("shoppingApp.Data.DbSet.Order", null)
+                        .WithMany()
+                        .HasForeignKey("OrdersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("OrderUser", b =>
                 {
                     b.HasOne("shoppingApp.Data.DbSet.Order", null)
@@ -267,26 +317,6 @@ namespace ShoppingApp.Data.Migrations
                         .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ShoppingApp.Data.DbSet.OrderItem", b =>
-                {
-                    b.HasOne("shoppingApp.Data.DbSet.Order", null)
-                        .WithMany("OrderItems")
-                        .HasForeignKey("OrderId");
-
-                    b.HasOne("shoppingApp.Data.DbSet.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("shoppingApp.Data.DbSet.Order", b =>
-                {
-                    b.Navigation("OrderItems");
                 });
 #pragma warning restore 612, 618
         }
