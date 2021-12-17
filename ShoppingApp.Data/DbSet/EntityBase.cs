@@ -1,8 +1,19 @@
+using System.ComponentModel.DataAnnotations;
+using ShoppingApp.Data.DbSet;
+
 namespace shoppingApp.Data.DbSet
 {
+    ///<summary>
+    /// 
+    ///</summary>
     public class EntityBase
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
-        public DateTime? DateCreated { get; set; } = new();
+        [Key]
+        public Guid Id { get; private set; } = Guid.NewGuid();
+        private DateTime DateCreated { get; set; } = DateTime.Now;
+        public Status Status { get; set; } = 0;
+    
     }
+
+  
 }
