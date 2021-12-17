@@ -56,7 +56,14 @@ namespace ReadyApp.Api.Rest.Controllers.v1
         {
             var business = await _unitOfWork.Businesses.Get(businessId);
             if(business == null) return NotFound("No business by Id");
-            _unitOfWork.Businesses.Delete(business);
+            // Problem
+            // There is one User, with many Businesses.
+            // There is one User, with many Orders.
+            // There is one business, with many products,
+            // There is many products, with one business,
+            // Makes it diffacult because, now before deleting the business
+            // 
+            // _unitOfWork.Businesses.Delete(business);
             await _unitOfWork.CompleteAsync();
             return NoContent();
         }

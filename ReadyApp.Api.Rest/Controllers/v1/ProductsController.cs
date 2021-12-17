@@ -20,12 +20,17 @@ namespace ReadyApp.Api.Rest.Controllers.v1
         {
             var product = _mapper.Map<Product>(incomming);
 
-            // Verify business exist
-            var isUserOfBusiness = await _unitOfWork.Products.IsUserOfBusiness(incomming.UserId, incomming.BusinessId);
+            // Verify IsProductOfBusiness then check if IsUserOfBusiness
+            // This will only allow users to only be able to post products here
+            var isUserOfBusiness = await _unitOfWork.Businesses.IsOwnerOfBusiness(incomming.UserId, incomming.BusinessId);
+            // var isProductOfBusiness = await _unitOfWork.Products.IsProductOfBusiness(incomming.UserId, incomming.BusinessId);
+            
             if(!isUserOfBusiness) return BadRequest("Not arthorized");
-
+            // if(!isProductOfBusiness) return BadRequest("Not arthorized");
+            
             await _unitOfWork.Products.Add(product);
             await _unitOfWork.CompleteAsync();
+            
             var outgoing = _mapper.Map<ProductDto>(product);
 
             return CreatedAtAction(nameof(Get), new {productId = outgoing.Id}, outgoing);
